@@ -7,10 +7,11 @@
 #include <pcl/registration/ndt.h>
 #include <pclomp/gicp_omp.h>
 #include <pclomp/ndt_omp.h>
+#include <fast_gicp/gicp/fast_gicp.hpp>
 
 namespace hdl_graph_slam {
 
-RegistrationMethods::RegistrationMethods() : registration_method(1), registration_resolution(2.0f), transformation_epsilon(1e-4), max_iterations(64), registration_methods({"ICP", "GICP", "NDT", "GICP_OMP", "NDT_OMP"}) {}
+RegistrationMethods::RegistrationMethods() : registration_method(1), registration_resolution(2.0f), transformation_epsilon(1e-4), max_iterations(64), registration_methods({"ICP", "GICP", "NDT", "GICP_OMP", "NDT_OMP", "FAST_GICP"}) {}
 
 RegistrationMethods::~RegistrationMethods() {}
 
@@ -56,6 +57,10 @@ pcl::Registration<pcl::PointXYZI, pcl::PointXYZI>::Ptr RegistrationMethods::meth
       auto ndt = pclomp::NormalDistributionsTransform<pcl::PointXYZI, pcl::PointXYZI>::Ptr(new pclomp::NormalDistributionsTransform<pcl::PointXYZI, pcl::PointXYZI>);
       ndt->setResolution(registration_resolution);
       registration = ndt;
+    } break;
+    case 5: {
+      auto gicp = boost::make_shared<fast_gicp::FastGICP<pcl::PointXYZI, pcl::PointXYZI>>();
+      registration = gicp;
     } break;
   }
 
