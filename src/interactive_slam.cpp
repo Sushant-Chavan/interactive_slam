@@ -744,6 +744,7 @@ int main(int argc, char** argv) {
     return 1;
   }
 
+  app->set_max_frame_rate(30.0);
   app->run();
 
   return 0;
