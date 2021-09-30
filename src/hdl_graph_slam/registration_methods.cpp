@@ -59,7 +59,7 @@ pcl::Registration<pcl::PointXYZI, pcl::PointXYZI>::Ptr RegistrationMethods::meth
       registration = ndt;
     } break;
     case 5: {
-      auto gicp = boost::make_shared<fast_gicp::FastGICP<pcl::PointXYZI, pcl::PointXYZI>>();
+      auto gicp = fast_gicp::FastGICP<pcl::PointXYZI, pcl::PointXYZI>::Ptr(new fast_gicp::FastGICP<pcl::PointXYZI, pcl::PointXYZI>);
       registration = gicp;
     } break;
   }
