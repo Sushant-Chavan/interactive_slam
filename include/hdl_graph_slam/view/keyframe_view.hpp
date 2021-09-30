@@ -71,6 +71,9 @@ public:
     shader.set_uniform("color_mode", 1);
     shader.set_uniform("info_values", Eigen::Vector4i(VERTEX | KEYFRAME, kf->id(), 0, 0));
     shader.set_uniform("apply_keyframe_scale", true);
+    Eigen::Matrix4f scaled_model_matrix = model_matrix;
+    scaled_model_matrix.block<3, 3>(0, 0) *= 0.375;
+    shader.set_uniform("model_matrix", scaled_model_matrix);
     const auto& sphere = glk::Primitives::instance()->primitive(glk::Primitives::SPHERE);
     sphere.draw(shader);
     shader.set_uniform("apply_keyframe_scale", false);

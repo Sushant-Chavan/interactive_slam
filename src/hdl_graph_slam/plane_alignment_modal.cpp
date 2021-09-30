@@ -94,7 +94,7 @@ bool PlaneAlignmentModal::run() {
 void PlaneAlignmentModal::draw_gl(glk::GLSLShader& shader) {
   DrawFlags flags;
 
-  Eigen::Matrix4f scale = (Eigen::Scaling<float>(7.5f, 7.5f, 0.15f) * Eigen::Isometry3f::Identity()).matrix();
+  Eigen::Matrix4f scale = (Eigen::Scaling<float>(5.1f, 5.1f, 0.15f) * Eigen::Isometry3f::Identity()).matrix();
   if (plane_begin) {
     plane_begin->draw(flags, shader, Eigen::Vector4f(0.0f, 0.0f, 1.0f, 1.0f), scale);
   }
