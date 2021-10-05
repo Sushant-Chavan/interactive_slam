@@ -96,9 +96,9 @@ void Application::run() {
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     glfwSwapBuffers(window);
 
-    std::chrono::duration<double, std::milli> draw_time = std::chrono::system_clock::now() - draw_start_time;
-    if (draw_time.count() < 1000/max_frame_rate) {
-        std::chrono::duration<double, std::milli> delta_ms(1000/max_frame_rate - draw_time.count());
+    std::chrono::duration<double, std::milli> draw_time_ms = std::chrono::system_clock::now() - draw_start_time;
+    if (draw_time_ms.count() < 1000/max_frame_rate) {
+        std::chrono::duration<double, std::milli> delta_ms(1000/max_frame_rate - draw_time_ms.count());
         auto delta_ms_duration = std::chrono::duration_cast<std::chrono::milliseconds>(delta_ms);
         std::this_thread::sleep_for(std::chrono::milliseconds(delta_ms_duration.count()));
     }
